@@ -615,6 +615,8 @@
 
 // @section homing
 
+
+
 // Specify here all the endstop connectors that are connected to any endstop or probe.
 // Almost all printers will be using one per axis. Probes will use one or more of the
 // extra connectors. Leave undefined any used for non-endstop and non-probe purposes.
@@ -659,6 +661,28 @@
 #define Y_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Z_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Z_MIN_PROBE_ENDSTOP_INVERTING true // Set to true to invert the logic of the probe.  // Switched to true for BABYSTEPPING
+
+//============================= Z Probe Options =============================
+#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+#define BLTOUCH
+#if ENABLED(BLTOUCH)
+#define BLTOUCH_DELAY 500 // *option
+//#define BLTOUCH_FORCE_5V_MODE
+#endif
+//#define PROBING_HEATERS_OFF // *option
+#define PROBING_FANS_OFF // *option
+#define X_PROBE_OFFSET_FROM_EXTRUDER 0 //Depend on your BLTouch installation value
+#define Y_PROBE_OFFSET_FROM_EXTRUDER -22 //Depend on your BLTouch installation value
+#define Z_PROBE_OFFSET_FROM_EXTRUDER -2.35 //Depend on your BLTouch installation value
+//It must be greater than or equal to the higher of the X_PROBE_OFFSET_FROM_EXTRUDER and Y_PROBE_OFFSET_FROM_EXTRUDER.
+#define MIN_PROBE_EDGE 22
+#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z / 5
+#define Z_CLEARANCE_DEPLOY_PROBE 15 // set up at least 10
+#define Z_CLEARANCE_BETWEEN_PROBES 5 // set up at least 5
+//=============================== Bed Leveling ==============================
+#define AUTO_BED_LEVELING_BILINEAR // *option
+
+
 
 /**
  * Stepper Drivers
