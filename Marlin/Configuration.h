@@ -859,7 +859,7 @@
  * Enable this option for a probe connected to the Z Min endstop pin.
  */
 #define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
-
+#define BLTOUCH
 /**
  * Z_MIN_PROBE_PIN
  *
@@ -915,6 +915,24 @@
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
 //#define BLTOUCH
+
+//============================= Z Probe Options =============================
+
+#if ENABLED(BLTOUCH)
+#define BLTOUCH_DELAY 500 // *option
+//#define BLTOUCH_FORCE_5V_MODE
+#endif
+//#define PROBING_HEATERS_OFF // *option
+#define PROBING_FANS_OFF // *option
+#define X_PROBE_OFFSET_FROM_EXTRUDER 0 //Depend on your BLTouch installation value
+#define Y_PROBE_OFFSET_FROM_EXTRUDER -22 //Depend on your BLTouch installation value
+#define Z_PROBE_OFFSET_FROM_EXTRUDER -2.35 //Depend on your BLTouch installation value
+//It must be greater than or equal to the higher of the X_PROBE_OFFSET_FROM_EXTRUDER and Y_PROBE_OFFSET_FROM_EXTRUDER.
+#define MIN_PROBE_EDGE 22
+#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z / 5
+#define Z_CLEARANCE_DEPLOY_PROBE 15 // set up at least 10
+#define Z_CLEARANCE_BETWEEN_PROBES 5 // set up at least 5
+
 
 /**
  * Touch-MI Probe by hotends.fr
@@ -990,13 +1008,13 @@
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define MIN_PROBE_EDGE 10
+#define MIN_PROBE_EDGE 22
 
 // X and Y axis travel speed (mm/m) between probes
 #define XY_PROBE_SPEED 8000
 
 // Feedrate (mm/m) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
+#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z / 5
 
 // Feedrate (mm/m) for the "accurate" probe of each point
 #define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2)
@@ -1027,7 +1045,7 @@
  * Example: `M851 Z-5` with a CLEARANCE of 4  =>  9mm from bed to nozzle.
  *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
-#define Z_CLEARANCE_DEPLOY_PROBE   10 // Z Clearance for Deploy/Stow
+#define Z_CLEARANCE_DEPLOY_PROBE   15 // Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
 #define Z_CLEARANCE_MULTI_PROBE     5 // Z Clearance between multiple probes
 //#define Z_AFTER_PROBING           5 // Z position after probing is done
@@ -1234,7 +1252,7 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-//#define AUTO_BED_LEVELING_BILINEAR
+#define AUTO_BED_LEVELING_BILINEAR
 //#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
